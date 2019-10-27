@@ -3,7 +3,7 @@ from twisted.web.wsgi import WSGIResource
 from twisted.web.server import Site
 from twisted.internet.defer import inlineCallbacks, returnValue
 
-from flask import Flask
+from flask import Flask, render_template
 from flask_login import LoginManager, UserMixin
 from crochet import no_setup
 
@@ -33,6 +33,9 @@ class WebServer(object):
         
         # Create Flask app and configure
         self.app = Flask(__name__)
+        @self.app.route('/')
+        def index():
+            return render_template('index.html')
         self.app.config['ERROR_404_HELP'] = False
 
         # Create REST API instance

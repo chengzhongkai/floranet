@@ -216,7 +216,8 @@ class RestApplications(ApplicationResource):
         appnonce = self.args['appnonce']
         appkey = self.args['appkey']
         fport = self.args['fport']
-        appinterface_id = self.args['appinterface_id']
+        #appinterface_id = self.args['appinterface_id']
+        appinterface_id = 1 
         
         message = {}
         # Check for required args
