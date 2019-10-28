@@ -57,7 +57,8 @@ if __name__ == '__main__':
     if not log.start(options.foreground, options.logfile, options.debug):
         exit(1)
 
-    version = pkg_resources.require('Floranet')[0].version
+    #version = pkg_resources.require('Floranet')[0].version
+    version = "0.0.1"
     log.info("Floranet version {version}", version=version)
     log.info("Starting up")
     

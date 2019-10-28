@@ -1,0 +1,856 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 11.5 (Raspbian 11.5-1+deb10u1)
+-- Dumped by pg_dump version 11.5 (Raspbian 11.5-1+deb10u1)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: alembic_version; Type: TABLE; Schema: public; Owner: floranet
+--
+
+CREATE TABLE public.alembic_version (
+    version_num character varying(32) NOT NULL
+);
+
+
+ALTER TABLE public.alembic_version OWNER TO floranet;
+
+--
+-- Name: app_properties; Type: TABLE; Schema: public; Owner: floranet
+--
+
+CREATE TABLE public.app_properties (
+    id integer NOT NULL,
+    application_id integer,
+    port integer NOT NULL,
+    name character varying NOT NULL,
+    type character varying NOT NULL,
+    created timestamp with time zone NOT NULL,
+    updated timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.app_properties OWNER TO floranet;
+
+--
+-- Name: app_properties_id_seq; Type: SEQUENCE; Schema: public; Owner: floranet
+--
+
+CREATE SEQUENCE public.app_properties_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.app_properties_id_seq OWNER TO floranet;
+
+--
+-- Name: app_properties_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: floranet
+--
+
+ALTER SEQUENCE public.app_properties_id_seq OWNED BY public.app_properties.id;
+
+
+--
+-- Name: appif_azure_iot_https; Type: TABLE; Schema: public; Owner: floranet
+--
+
+CREATE TABLE public.appif_azure_iot_https (
+    id integer NOT NULL,
+    name character varying NOT NULL,
+    iothost character varying NOT NULL,
+    keyname character varying NOT NULL,
+    keyvalue character varying NOT NULL,
+    poll_interval integer NOT NULL,
+    created timestamp with time zone NOT NULL,
+    updated timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.appif_azure_iot_https OWNER TO floranet;
+
+--
+-- Name: appif_azure_iot_https_id_seq; Type: SEQUENCE; Schema: public; Owner: floranet
+--
+
+CREATE SEQUENCE public.appif_azure_iot_https_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.appif_azure_iot_https_id_seq OWNER TO floranet;
+
+--
+-- Name: appif_azure_iot_https_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: floranet
+--
+
+ALTER SEQUENCE public.appif_azure_iot_https_id_seq OWNED BY public.appif_azure_iot_https.id;
+
+
+--
+-- Name: appif_azure_iot_mqtt; Type: TABLE; Schema: public; Owner: floranet
+--
+
+CREATE TABLE public.appif_azure_iot_mqtt (
+    id integer NOT NULL,
+    name character varying NOT NULL,
+    iothost character varying NOT NULL,
+    keyname character varying NOT NULL,
+    keyvalue character varying NOT NULL,
+    created timestamp with time zone NOT NULL,
+    updated timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.appif_azure_iot_mqtt OWNER TO floranet;
+
+--
+-- Name: appif_azure_iot_mqtt_id_seq; Type: SEQUENCE; Schema: public; Owner: floranet
+--
+
+CREATE SEQUENCE public.appif_azure_iot_mqtt_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.appif_azure_iot_mqtt_id_seq OWNER TO floranet;
+
+--
+-- Name: appif_azure_iot_mqtt_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: floranet
+--
+
+ALTER SEQUENCE public.appif_azure_iot_mqtt_id_seq OWNED BY public.appif_azure_iot_mqtt.id;
+
+
+--
+-- Name: appif_file_text_store; Type: TABLE; Schema: public; Owner: floranet
+--
+
+CREATE TABLE public.appif_file_text_store (
+    id integer NOT NULL,
+    name character varying NOT NULL,
+    file character varying NOT NULL,
+    created timestamp with time zone NOT NULL,
+    updated timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.appif_file_text_store OWNER TO floranet;
+
+--
+-- Name: appif_file_text_store_id_seq; Type: SEQUENCE; Schema: public; Owner: floranet
+--
+
+CREATE SEQUENCE public.appif_file_text_store_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.appif_file_text_store_id_seq OWNER TO floranet;
+
+--
+-- Name: appif_file_text_store_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: floranet
+--
+
+ALTER SEQUENCE public.appif_file_text_store_id_seq OWNED BY public.appif_file_text_store.id;
+
+
+--
+-- Name: appif_reflector; Type: TABLE; Schema: public; Owner: floranet
+--
+
+CREATE TABLE public.appif_reflector (
+    id integer NOT NULL,
+    name character varying NOT NULL,
+    created timestamp with time zone NOT NULL,
+    updated timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.appif_reflector OWNER TO floranet;
+
+--
+-- Name: appif_reflector_id_seq; Type: SEQUENCE; Schema: public; Owner: floranet
+--
+
+CREATE SEQUENCE public.appif_reflector_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.appif_reflector_id_seq OWNER TO floranet;
+
+--
+-- Name: appif_reflector_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: floranet
+--
+
+ALTER SEQUENCE public.appif_reflector_id_seq OWNED BY public.appif_reflector.id;
+
+
+--
+-- Name: appinterfaces; Type: TABLE; Schema: public; Owner: floranet
+--
+
+CREATE TABLE public.appinterfaces (
+    id integer NOT NULL,
+    interfaces_id integer,
+    interfaces_type character varying
+);
+
+
+ALTER TABLE public.appinterfaces OWNER TO floranet;
+
+--
+-- Name: appinterfaces_id_seq; Type: SEQUENCE; Schema: public; Owner: floranet
+--
+
+CREATE SEQUENCE public.appinterfaces_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.appinterfaces_id_seq OWNER TO floranet;
+
+--
+-- Name: appinterfaces_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: floranet
+--
+
+ALTER SEQUENCE public.appinterfaces_id_seq OWNED BY public.appinterfaces.id;
+
+
+--
+-- Name: applications; Type: TABLE; Schema: public; Owner: floranet
+--
+
+CREATE TABLE public.applications (
+    id integer NOT NULL,
+    appeui numeric NOT NULL,
+    name character varying,
+    domain character varying,
+    appnonce integer NOT NULL,
+    appkey numeric NOT NULL,
+    fport integer NOT NULL,
+    created timestamp with time zone NOT NULL,
+    updated timestamp with time zone NOT NULL,
+    appinterface_id integer
+);
+
+
+ALTER TABLE public.applications OWNER TO floranet;
+
+--
+-- Name: applications_id_seq; Type: SEQUENCE; Schema: public; Owner: floranet
+--
+
+CREATE SEQUENCE public.applications_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.applications_id_seq OWNER TO floranet;
+
+--
+-- Name: applications_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: floranet
+--
+
+ALTER SEQUENCE public.applications_id_seq OWNED BY public.applications.id;
+
+
+--
+-- Name: config; Type: TABLE; Schema: public; Owner: floranet
+--
+
+CREATE TABLE public.config (
+    id integer NOT NULL,
+    name character varying NOT NULL,
+    listen inet NOT NULL,
+    port integer NOT NULL,
+    webport integer NOT NULL,
+    apitoken character varying NOT NULL,
+    freqband character varying NOT NULL,
+    netid integer NOT NULL,
+    duplicateperiod integer NOT NULL,
+    fcrelaxed boolean NOT NULL,
+    otaastart integer NOT NULL,
+    otaaend integer NOT NULL,
+    macqueueing boolean NOT NULL,
+    macqueuelimit integer NOT NULL,
+    adrenable boolean NOT NULL,
+    adrmargin double precision NOT NULL,
+    adrcycletime integer NOT NULL,
+    adrmessagetime integer NOT NULL,
+    created timestamp with time zone NOT NULL,
+    updated timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.config OWNER TO floranet;
+
+--
+-- Name: config_id_seq; Type: SEQUENCE; Schema: public; Owner: floranet
+--
+
+CREATE SEQUENCE public.config_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.config_id_seq OWNER TO floranet;
+
+--
+-- Name: config_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: floranet
+--
+
+ALTER SEQUENCE public.config_id_seq OWNED BY public.config.id;
+
+
+--
+-- Name: devices; Type: TABLE; Schema: public; Owner: floranet
+--
+
+CREATE TABLE public.devices (
+    id integer NOT NULL,
+    deveui numeric NOT NULL,
+    devaddr integer,
+    devclass character varying(1) NOT NULL,
+    appeui numeric NOT NULL,
+    nwkskey numeric,
+    appskey numeric,
+    tx_chan integer,
+    tx_datr character varying,
+    gw_addr character varying,
+    "time" timestamp with time zone,
+    tmst numeric,
+    fcntup integer DEFAULT 0 NOT NULL,
+    fcntdown integer DEFAULT 0 NOT NULL,
+    adr_datr character varying,
+    snr_pointer integer,
+    snr_average double precision,
+    fcnterror boolean NOT NULL,
+    created timestamp with time zone,
+    updated timestamp with time zone,
+    devnonce integer[],
+    name character varying DEFAULT 'device'::character varying NOT NULL,
+    enabled boolean DEFAULT true NOT NULL,
+    otaa boolean DEFAULT true NOT NULL,
+    latitude double precision,
+    longitude double precision,
+    snr double precision[],
+    appname character varying,
+    adr boolean DEFAULT true NOT NULL
+);
+
+
+ALTER TABLE public.devices OWNER TO floranet;
+
+--
+-- Name: devices_id_seq; Type: SEQUENCE; Schema: public; Owner: floranet
+--
+
+CREATE SEQUENCE public.devices_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.devices_id_seq OWNER TO floranet;
+
+--
+-- Name: devices_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: floranet
+--
+
+ALTER SEQUENCE public.devices_id_seq OWNED BY public.devices.id;
+
+
+--
+-- Name: gateways; Type: TABLE; Schema: public; Owner: floranet
+--
+
+CREATE TABLE public.gateways (
+    id integer NOT NULL,
+    host inet NOT NULL,
+    name character varying,
+    enabled boolean NOT NULL,
+    eui numeric NOT NULL,
+    power integer NOT NULL,
+    port character varying,
+    latitude double precision,
+    longitude double precision,
+    created timestamp with time zone NOT NULL,
+    updated timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.gateways OWNER TO floranet;
+
+--
+-- Name: gateways_id_seq; Type: SEQUENCE; Schema: public; Owner: floranet
+--
+
+CREATE SEQUENCE public.gateways_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.gateways_id_seq OWNER TO floranet;
+
+--
+-- Name: gateways_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: floranet
+--
+
+ALTER SEQUENCE public.gateways_id_seq OWNED BY public.gateways.id;
+
+
+--
+-- Name: app_properties id; Type: DEFAULT; Schema: public; Owner: floranet
+--
+
+ALTER TABLE ONLY public.app_properties ALTER COLUMN id SET DEFAULT nextval('public.app_properties_id_seq'::regclass);
+
+
+--
+-- Name: appif_azure_iot_https id; Type: DEFAULT; Schema: public; Owner: floranet
+--
+
+ALTER TABLE ONLY public.appif_azure_iot_https ALTER COLUMN id SET DEFAULT nextval('public.appif_azure_iot_https_id_seq'::regclass);
+
+
+--
+-- Name: appif_azure_iot_mqtt id; Type: DEFAULT; Schema: public; Owner: floranet
+--
+
+ALTER TABLE ONLY public.appif_azure_iot_mqtt ALTER COLUMN id SET DEFAULT nextval('public.appif_azure_iot_mqtt_id_seq'::regclass);
+
+
+--
+-- Name: appif_file_text_store id; Type: DEFAULT; Schema: public; Owner: floranet
+--
+
+ALTER TABLE ONLY public.appif_file_text_store ALTER COLUMN id SET DEFAULT nextval('public.appif_file_text_store_id_seq'::regclass);
+
+
+--
+-- Name: appif_reflector id; Type: DEFAULT; Schema: public; Owner: floranet
+--
+
+ALTER TABLE ONLY public.appif_reflector ALTER COLUMN id SET DEFAULT nextval('public.appif_reflector_id_seq'::regclass);
+
+
+--
+-- Name: appinterfaces id; Type: DEFAULT; Schema: public; Owner: floranet
+--
+
+ALTER TABLE ONLY public.appinterfaces ALTER COLUMN id SET DEFAULT nextval('public.appinterfaces_id_seq'::regclass);
+
+
+--
+-- Name: applications id; Type: DEFAULT; Schema: public; Owner: floranet
+--
+
+ALTER TABLE ONLY public.applications ALTER COLUMN id SET DEFAULT nextval('public.applications_id_seq'::regclass);
+
+
+--
+-- Name: config id; Type: DEFAULT; Schema: public; Owner: floranet
+--
+
+ALTER TABLE ONLY public.config ALTER COLUMN id SET DEFAULT nextval('public.config_id_seq'::regclass);
+
+
+--
+-- Name: devices id; Type: DEFAULT; Schema: public; Owner: floranet
+--
+
+ALTER TABLE ONLY public.devices ALTER COLUMN id SET DEFAULT nextval('public.devices_id_seq'::regclass);
+
+
+--
+-- Name: gateways id; Type: DEFAULT; Schema: public; Owner: floranet
+--
+
+ALTER TABLE ONLY public.gateways ALTER COLUMN id SET DEFAULT nextval('public.gateways_id_seq'::regclass);
+
+
+--
+-- Data for Name: alembic_version; Type: TABLE DATA; Schema: public; Owner: floranet
+--
+
+COPY public.alembic_version (version_num) FROM stdin;
+d5ed30f62f76
+\.
+
+
+--
+-- Data for Name: app_properties; Type: TABLE DATA; Schema: public; Owner: floranet
+--
+
+COPY public.app_properties (id, application_id, port, name, type, created, updated) FROM stdin;
+\.
+
+
+--
+-- Data for Name: appif_azure_iot_https; Type: TABLE DATA; Schema: public; Owner: floranet
+--
+
+COPY public.appif_azure_iot_https (id, name, iothost, keyname, keyvalue, poll_interval, created, updated) FROM stdin;
+\.
+
+
+--
+-- Data for Name: appif_azure_iot_mqtt; Type: TABLE DATA; Schema: public; Owner: floranet
+--
+
+COPY public.appif_azure_iot_mqtt (id, name, iothost, keyname, keyvalue, created, updated) FROM stdin;
+\.
+
+
+--
+-- Data for Name: appif_file_text_store; Type: TABLE DATA; Schema: public; Owner: floranet
+--
+
+COPY public.appif_file_text_store (id, name, file, created, updated) FROM stdin;
+\.
+
+
+--
+-- Data for Name: appif_reflector; Type: TABLE DATA; Schema: public; Owner: floranet
+--
+
+COPY public.appif_reflector (id, name, created, updated) FROM stdin;
+1	Test Interface	2019-10-25 10:32:01.351996+01	2019-10-25 10:32:01.352307+01
+4	Test Interface2	2019-10-25 10:38:41.78827+01	2019-10-25 10:38:41.788528+01
+\.
+
+
+--
+-- Data for Name: appinterfaces; Type: TABLE DATA; Schema: public; Owner: floranet
+--
+
+COPY public.appinterfaces (id, interfaces_id, interfaces_type) FROM stdin;
+1	1	Reflector
+2	4	Reflector
+\.
+
+
+--
+-- Data for Name: applications; Type: TABLE DATA; Schema: public; Owner: floranet
+--
+
+COPY public.applications (id, appeui, name, domain, appnonce, appkey, fport, created, updated, appinterface_id) FROM stdin;
+1	7	Test	\N	11273202	7	15	2019-10-28 00:31:30.769555+00	2019-10-28 00:31:30.769849+00	1
+\.
+
+
+--
+-- Data for Name: config; Type: TABLE DATA; Schema: public; Owner: floranet
+--
+
+COPY public.config (id, name, listen, port, webport, apitoken, freqband, netid, duplicateperiod, fcrelaxed, otaastart, otaaend, macqueueing, macqueuelimit, adrenable, adrmargin, adrcycletime, adrmessagetime, created, updated) FROM stdin;
+1	floranet	0.0.0.0	1700	8000	IMxHj@wfNkym@*+V85Rs^G<QXMD~p[eaX3S=_D8f7{z0q{GN	US915	66051	10	t	100663297	101711871	t	120	t	0	9000	10	2019-10-25 02:06:27.07952+01	2019-10-25 02:06:27.079688+01
+\.
+
+
+--
+-- Data for Name: devices; Type: TABLE DATA; Schema: public; Owner: floranet
+--
+
+COPY public.devices (id, deveui, devaddr, devclass, appeui, nwkskey, appskey, tx_chan, tx_datr, gw_addr, "time", tmst, fcntup, fcntdown, adr_datr, snr_pointer, snr_average, fcnterror, created, updated, devnonce, name, enabled, otaa, latitude, longitude, snr, appname, adr) FROM stdin;
+\.
+
+
+--
+-- Data for Name: gateways; Type: TABLE DATA; Schema: public; Owner: floranet
+--
+
+COPY public.gateways (id, host, name, enabled, eui, power, port, latitude, longitude, created, updated) FROM stdin;
+2	127.0.0.1	test	t	12273815315514654977	26	\N	\N	\N	2019-10-28 00:37:11.907163+00	2019-10-28 00:37:11.907455+00
+\.
+
+
+--
+-- Name: app_properties_id_seq; Type: SEQUENCE SET; Schema: public; Owner: floranet
+--
+
+SELECT pg_catalog.setval('public.app_properties_id_seq', 1, false);
+
+
+--
+-- Name: appif_azure_iot_https_id_seq; Type: SEQUENCE SET; Schema: public; Owner: floranet
+--
+
+SELECT pg_catalog.setval('public.appif_azure_iot_https_id_seq', 1, false);
+
+
+--
+-- Name: appif_azure_iot_mqtt_id_seq; Type: SEQUENCE SET; Schema: public; Owner: floranet
+--
+
+SELECT pg_catalog.setval('public.appif_azure_iot_mqtt_id_seq', 1, false);
+
+
+--
+-- Name: appif_file_text_store_id_seq; Type: SEQUENCE SET; Schema: public; Owner: floranet
+--
+
+SELECT pg_catalog.setval('public.appif_file_text_store_id_seq', 1, false);
+
+
+--
+-- Name: appif_reflector_id_seq; Type: SEQUENCE SET; Schema: public; Owner: floranet
+--
+
+SELECT pg_catalog.setval('public.appif_reflector_id_seq', 4, true);
+
+
+--
+-- Name: appinterfaces_id_seq; Type: SEQUENCE SET; Schema: public; Owner: floranet
+--
+
+SELECT pg_catalog.setval('public.appinterfaces_id_seq', 2, true);
+
+
+--
+-- Name: applications_id_seq; Type: SEQUENCE SET; Schema: public; Owner: floranet
+--
+
+SELECT pg_catalog.setval('public.applications_id_seq', 1, true);
+
+
+--
+-- Name: config_id_seq; Type: SEQUENCE SET; Schema: public; Owner: floranet
+--
+
+SELECT pg_catalog.setval('public.config_id_seq', 1, true);
+
+
+--
+-- Name: devices_id_seq; Type: SEQUENCE SET; Schema: public; Owner: floranet
+--
+
+SELECT pg_catalog.setval('public.devices_id_seq', 1, false);
+
+
+--
+-- Name: gateways_id_seq; Type: SEQUENCE SET; Schema: public; Owner: floranet
+--
+
+SELECT pg_catalog.setval('public.gateways_id_seq', 2, true);
+
+
+--
+-- Name: alembic_version alembic_version_pkc; Type: CONSTRAINT; Schema: public; Owner: floranet
+--
+
+ALTER TABLE ONLY public.alembic_version
+    ADD CONSTRAINT alembic_version_pkc PRIMARY KEY (version_num);
+
+
+--
+-- Name: app_properties app_properties_pkey; Type: CONSTRAINT; Schema: public; Owner: floranet
+--
+
+ALTER TABLE ONLY public.app_properties
+    ADD CONSTRAINT app_properties_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: appif_azure_iot_https appif_azure_iot_https_name_key; Type: CONSTRAINT; Schema: public; Owner: floranet
+--
+
+ALTER TABLE ONLY public.appif_azure_iot_https
+    ADD CONSTRAINT appif_azure_iot_https_name_key UNIQUE (name);
+
+
+--
+-- Name: appif_azure_iot_https appif_azure_iot_https_pkey; Type: CONSTRAINT; Schema: public; Owner: floranet
+--
+
+ALTER TABLE ONLY public.appif_azure_iot_https
+    ADD CONSTRAINT appif_azure_iot_https_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: appif_azure_iot_mqtt appif_azure_iot_mqtt_name_key; Type: CONSTRAINT; Schema: public; Owner: floranet
+--
+
+ALTER TABLE ONLY public.appif_azure_iot_mqtt
+    ADD CONSTRAINT appif_azure_iot_mqtt_name_key UNIQUE (name);
+
+
+--
+-- Name: appif_azure_iot_mqtt appif_azure_iot_mqtt_pkey; Type: CONSTRAINT; Schema: public; Owner: floranet
+--
+
+ALTER TABLE ONLY public.appif_azure_iot_mqtt
+    ADD CONSTRAINT appif_azure_iot_mqtt_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: appif_file_text_store appif_file_text_store_file_key; Type: CONSTRAINT; Schema: public; Owner: floranet
+--
+
+ALTER TABLE ONLY public.appif_file_text_store
+    ADD CONSTRAINT appif_file_text_store_file_key UNIQUE (file);
+
+
+--
+-- Name: appif_file_text_store appif_file_text_store_name_key; Type: CONSTRAINT; Schema: public; Owner: floranet
+--
+
+ALTER TABLE ONLY public.appif_file_text_store
+    ADD CONSTRAINT appif_file_text_store_name_key UNIQUE (name);
+
+
+--
+-- Name: appif_file_text_store appif_file_text_store_pkey; Type: CONSTRAINT; Schema: public; Owner: floranet
+--
+
+ALTER TABLE ONLY public.appif_file_text_store
+    ADD CONSTRAINT appif_file_text_store_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: appif_reflector appif_reflector_name_key; Type: CONSTRAINT; Schema: public; Owner: floranet
+--
+
+ALTER TABLE ONLY public.appif_reflector
+    ADD CONSTRAINT appif_reflector_name_key UNIQUE (name);
+
+
+--
+-- Name: appif_reflector appif_reflector_pkey; Type: CONSTRAINT; Schema: public; Owner: floranet
+--
+
+ALTER TABLE ONLY public.appif_reflector
+    ADD CONSTRAINT appif_reflector_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: appinterfaces appinterfaces_pkey; Type: CONSTRAINT; Schema: public; Owner: floranet
+--
+
+ALTER TABLE ONLY public.appinterfaces
+    ADD CONSTRAINT appinterfaces_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: applications applications_appeui_key; Type: CONSTRAINT; Schema: public; Owner: floranet
+--
+
+ALTER TABLE ONLY public.applications
+    ADD CONSTRAINT applications_appeui_key UNIQUE (appeui);
+
+
+--
+-- Name: applications applications_pkey; Type: CONSTRAINT; Schema: public; Owner: floranet
+--
+
+ALTER TABLE ONLY public.applications
+    ADD CONSTRAINT applications_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: config config_pkey; Type: CONSTRAINT; Schema: public; Owner: floranet
+--
+
+ALTER TABLE ONLY public.config
+    ADD CONSTRAINT config_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: devices devices_pkey; Type: CONSTRAINT; Schema: public; Owner: floranet
+--
+
+ALTER TABLE ONLY public.devices
+    ADD CONSTRAINT devices_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: gateways gateways_eui_key; Type: CONSTRAINT; Schema: public; Owner: floranet
+--
+
+ALTER TABLE ONLY public.gateways
+    ADD CONSTRAINT gateways_eui_key UNIQUE (eui);
+
+
+--
+-- Name: gateways gateways_host_key; Type: CONSTRAINT; Schema: public; Owner: floranet
+--
+
+ALTER TABLE ONLY public.gateways
+    ADD CONSTRAINT gateways_host_key UNIQUE (host);
+
+
+--
+-- Name: gateways gateways_pkey; Type: CONSTRAINT; Schema: public; Owner: floranet
+--
+
+ALTER TABLE ONLY public.gateways
+    ADD CONSTRAINT gateways_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: devices_deveui_unique; Type: INDEX; Schema: public; Owner: floranet
+--
+
+CREATE UNIQUE INDEX devices_deveui_unique ON public.devices USING btree (deveui);
+
+
+--
+-- PostgreSQL database dump complete
+--
+

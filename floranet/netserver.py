@@ -450,6 +450,7 @@ class NetServer(object):
             # Join Request
             if message.isJoinRequest():                
                 # Get the application using appeui
+                log.info("-------->Join request for device {deveui}.",deveui=euiString(message.deveui))
                 app = yield Application.find(where=['appeui = ?', message.appeui], limit=1)
                 #app = next((a for a in self.applications if
                 #            a.appeui == message.appeui), None)
