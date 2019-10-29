@@ -683,7 +683,7 @@ class NetServer(object):
         # Create Txpk objects
         txpk = self._txpkResponse(device, data, gateway, itmst=int(device.tmst),
                                   immediate=False)
-        request = GatewayMessage(gatewayEUI=gateway.eui, remote=(gateway.host,
+        request = GatewayMessage(version=2, gatewayEUI=gateway.eui, remote=(gateway.host,
                                          gateway.port))
         
         # Save the frame count down

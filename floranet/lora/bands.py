@@ -352,6 +352,6 @@ class AS920(LoraBand):
         Returns:
             A dict of RX2 frequency, datarate string, datarate index
         """
-        rxindex = 0
+        rxindex = 2
         return {'freq': 923.2, 'datr': self.datarate[rxindex],
                 'index': rxindex}
