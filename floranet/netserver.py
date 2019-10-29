@@ -17,7 +17,7 @@ from floranet.imanager import interfaceManager
 from floranet.lora.wan import LoraWAN, GatewayMessage, Txpk
 from floranet.lora.mac import (MACMessage, MACDataDownlinkMessage, JoinAcceptMessage,
       MACCommand, LinkCheckAns, LinkADRReq)
-from floranet.lora.bands import AU915, US915, EU868
+from floranet.lora.bands import AU915, US915, EU868, AS920
 from floranet.lora.crypto import aesEncrypt
 from floranet.web.webserver import WebServer
 from floranet.util import txsleep, euiString, devaddrString, intPackBytes, intUnpackBytes
@@ -434,6 +434,8 @@ class NetServer(object):
         Returns:
             True on success, otherwise False
         """
+        if not request.rxpk:
+            request.rxpk = []
         for rxpk in request.rxpk:        
             # Decode the MAC message
             message = MACMessage.decode(rxpk.data)
@@ -738,7 +740,7 @@ class NetServer(object):
         """ 
         # Get receive window parameters and
         # set dlsettings field
-        device.rx = self.band.rxparams((device.tx_chan, device.tx_datr))
+        device.rx = self.band.rxparams((device.tx_chan, device.tx_datr), join=True)
         dlsettings = 0 | self.band.rx1droffset << 4 | device.rx[2]['index']
         
         # Create the Join Response message
@@ -748,8 +750,8 @@ class NetServer(object):
                                      self.config.netid, device.devaddr,
                                      dlsettings, device.rx[1]['delay'])
         data = response.encode()
-        
         txpk = self._txpkResponse(device, data, gateway, rxpk.tmst)
+        
         # Send the RX1 window messages
         self.lora.sendPullResponse(request, txpk[1])
         # Send the RX2 window message

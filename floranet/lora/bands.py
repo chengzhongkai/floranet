@@ -3,7 +3,7 @@
 class LoraBand(object):
     """Base class for Lora radio bands."""
     
-    BANDS = {'AU915', 'US915', 'EU868'}
+    BANDS = {'AU915', 'US915', 'EU868', 'AS920'}
         
     def _rx1receive(self, txch, txdr, rx1droffset):
         """Get first receive window parameters
@@ -251,3 +251,107 @@ class EU868(LoraBand):
         return {'freq': 869.525, 'datr': self.datarate[rxindex],
                 'index': rxindex}
 
+        
+class AS920(LoraBand):
+    """AS 920-923 ISM Band
+    
+    upstream (list): 72 upstream (from device) channels:
+                    64 channels (0 to 63) utilizing LoRa 125 kHz BW
+                    starting at 902.3 MHz and incrementing
+                    linearly by 200 kHz to 914.9 MHz.
+                    8 channels (64 to 71) utilizing LoRa 500 kHz BW
+                    starting at 903.0 MHz and incrementing linearly
+                    by 1.6 MHz to 914.2 MHz. Units of MHz
+    downstream (list): 8 channels numbered 0 to 7 utilizing
+                    LoRa 500 kHz BW starting at 923.3 MHz and incrementing
+                    linearly by 600 kHz to 927.5 MHz. Units of MHz
+    datarate (dict): Data rate configuration as per Table 18 of the
+                    LoRa specification
+    datarate_rev (dict): Reverse lookup for datarate.
+    maxpayload (dict): Maximim payload size, indexed by datarate as per
+                    Table 20 of the LoRa specification
+    rx1dr (dict): Dictionary of lists to lookup the RX1 window data rate by
+                    transmit data rate and Rx1DROffset parameters. Lookup by
+                    rx1dr[txdatarate][rx1droffset]
+    rx1droffset (int): RX1 default DR offset
+    receive_delay (dict): First and second window window receive delays
+    join_accept_delay (dict): First and second window join accept delay
+    max_fcnt_gap  (int): Maximum tolerable frame count gap.
+    maxmac (dict): List of maximum MACpayload sizes (in bytes) for each
+                    datarate.
+    maxapp (dict): List of maximum application sizes (in bytes) for each
+                    datarate.
+                    
+                    
+    """
+
+    def __init__(self):
+        """Initialize a US915 band object."""
+
+        # Upstream channels in MHz
+        self.upstream = [ 923.20, 923.40, 922.20, 922.40, 922.60, 922.80, 923.00, 922.00, 922.10, 921.80 ]
+        
+        
+        # Downstream channels in MHz
+        self.downstream = self.upstream
+        self.datarate = {
+            0: 'SF12BW125',
+            1: 'SF11BW125',
+            2: 'SF10BW125',
+            3: 'SF9BW125',
+            4: 'SF8BW125',
+            5: 'SF7BW125',
+            6: 'SF7BW250'
+            #7: FSK ?
+        }
+        self.datarate_rev = {v:k for k, v in self.datarate.items()}
+        self.txpower = { 0:20 , 1:14 , 2:11 , 3:8 , 4:5 , 5:2 }
+        self.rx1dr = {
+            0: [ 0 , 0 , 0 , 0 , 0 , 0 ],
+            1: [ 1 , 0 , 0 , 0 , 0 , 0 ],
+            2: [ 2 , 1 , 0 , 0 , 0 , 0 ],
+            3: [ 3 , 2 , 1 , 0 , 0 , 0 ],
+            4: [ 4 , 3 , 2 , 1 , 0 , 0 ],
+            5: [ 5 , 4 , 3 , 2 , 1 , 0 ],
+            6: [ 6 , 5 , 4 , 3 , 2 , 1 ],
+            7: [ 7 , 6 , 5 , 4 , 3 , 2 ],
+        }
+        
+        self.rx1droffset = 0
+        self.receive_delay = {1: 1, 2: 2}
+        self.join_accept_delay = {1: 5, 2: 6}
+        self.max_fcnt_gap = 16384
+        self.maxpayloadlen = {
+            0: 19,
+            1: 61,
+            2: 137,
+            3: 250,
+            4: 250,
+            8: 61,
+            9: 137,
+            10: 250,
+            11: 250,
+            12: 250,
+            13: 250 }
+        self.maxappdatalen = {
+            0: 11,
+            1: 53,
+            2: 129,
+            3: 242,
+            4: 242,
+            8: 53,
+            9: 129,
+            10: 242,
+            11: 242,
+            12: 242,
+            13: 242 }
+    def _rx2receive(self):
+        """Get second receive window parameters
+        RX2 (second receive window) settings uses a fixed data
+        rate and frequency. Default parameters are 869.525Mhz / DR0
+        Returns:
+            A dict of RX2 frequency, datarate string, datarate index
+        """
+        rxindex = 0
+        return {'freq': 923.2, 'datr': self.datarate[rxindex],
+                'index': rxindex}
