@@ -452,7 +452,6 @@ class NetServer(object):
             # Join Request
             if message.isJoinRequest():                
                 # Get the application using appeui
-                log.info("-------->Join request for device {deveui}.",deveui=euiString(message.deveui))
                 app = yield Application.find(where=['appeui = ?', message.appeui], limit=1)
                 #app = next((a for a in self.applications if
                 #            a.appeui == message.appeui), None)
@@ -466,15 +465,21 @@ class NetServer(object):
                 # Find the Device
                 device = yield Device.find(where=['deveui = ?', message.deveui], limit=1)
                 if device is None:
-                    log.info("Message from unregistered device {deveui}",
-                         deveui=euiString(message.deveui))
-                    returnValue(False)
-                    
-                # Check the device is enabled
-                if not device.enabled:
-                    log.info("Join request for disabled device {deveui}.",
-                         deveui=euiString(device.deveui))
-                    returnValue(False)
+                    #log.info("Message from unregistered device {deveui}",
+                    #     deveui=euiString(message.deveui))
+                    #returnValue(False)
+                    # TODO save device to database (cheng)
+                    device = Device(deveui=message.deveui, name='smk_node', devclass='A',
+                                    enabled=True, otaa=True, devaddr=None, devnonce=[],
+                                    appeui=message.appeui, nwkskey='', appskey='',
+                                    fcntup=0, fcntdown=0, fcnterror=False,snr=[],snr_average=0)
+                    #device.save()
+                else:    
+                    # Check the device is enabled
+                    if not device.enabled:
+                        log.info("Join request for disabled device {deveui}.",
+                            deveui=euiString(device.deveui))
+                        returnValue(False)
                 
                 # Process join request
                 joined = yield self._processJoinRequest(message, app, device)
@@ -501,6 +506,7 @@ class NetServer(object):
                             devaddr=devaddrString(device.devaddr))
                     
                     # Send the join response
+                    device.save()
                     self._sendJoinResponse(request, rxpk, gateway, app, device)
                     returnValue(True)
                 else:
