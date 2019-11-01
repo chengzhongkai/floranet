@@ -305,7 +305,7 @@ class AS920(LoraBand):
             #7: FSK ?
         }
         self.datarate_rev = {v:k for k, v in self.datarate.items()}
-        self.txpower = { 0:20 , 1:14 , 2:11 , 3:8 , 4:5 , 5:2 }
+        self.txpower = { 0:16 , 1:14 , 2:11 , 3:8 , 4:5 , 5:2 }
         self.rx1dr = {
             0: [ 0 , 0 , 0 , 0 , 0 , 0 ],
             1: [ 1 , 0 , 0 , 0 , 0 , 0 ],
@@ -322,29 +322,25 @@ class AS920(LoraBand):
         self.join_accept_delay = {1: 5, 2: 6}
         self.max_fcnt_gap = 16384
         self.maxpayloadlen = {
-            0: 19,
-            1: 61,
-            2: 137,
-            3: 250,
-            4: 250,
-            8: 61,
-            9: 137,
-            10: 250,
-            11: 250,
-            12: 250,
-            13: 250 }
+            0: 0,
+            1: 0,
+            2: 19,
+            3: 61,
+            4: 133,
+            5: 250,
+            6: 250,
+            7: 250
+        }
         self.maxappdatalen = {
-            0: 11,
-            1: 53,
-            2: 129,
-            3: 242,
-            4: 242,
-            8: 53,
-            9: 129,
-            10: 242,
-            11: 242,
-            12: 242,
-            13: 242 }
+            0: 0,
+            1: 0,
+            2: 11,
+            3: 53,
+            4: 125,
+            5: 242,
+            6: 242,
+            7: 242,
+        }
     def _rx2receive(self):
         """Get second receive window parameters
         RX2 (second receive window) settings uses a fixed data
