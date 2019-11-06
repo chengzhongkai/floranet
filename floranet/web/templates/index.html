@@ -4,8 +4,45 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
+<link rel="icon" href="/static/img/favicon.png">
+<link type="text/css" href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet"/>
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/main.js"></script>
 </head>
-<body>
-<h1>lorawan network server </h1>
+<body class='top'>
+	<div class='hearder row  top'>
+		<h1 style="color: white;"><img src='/static/img/favicon.png' style='height:50px'>lorawan network server </h1>
+	</div>
+	<div class='body row scroll-y center'>
+		<div class='left subcol'>
+			<div class='inLayout' ><ul>
+			<li id='apps'>Applications</li>
+			<li id='gateways'>Gateways</li>
+			<li id='devices'>Devices</li>
+			<li id=''>Config</li>
+			<li id='system'>Status</li>
+				</ul></div>
+		</div>
+		<div class='right subcol'>
+			<div class='inLayout' id='mainDiv'>
+			
+		        Application
+			<table>
+			<th>
+				<td>Id</td>
+				<td>AppEUI</td>
+				<td>AppKey</td>
+				<td>Descript</td>
+				<td>Interface</td>
+			</th>	
+			<tr></tr>
+			</table>
+			
+			
+			</div></div>
+	</div>
+	<div class='footer row'>
+		<div id='msg_bar'></div>
+	</div>
 </body>
 </html> 
