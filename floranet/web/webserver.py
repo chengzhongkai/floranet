@@ -32,7 +32,8 @@ class WebServer(object):
         self.port = None
         
         # Create Flask app and configure
-        self.app = Flask(__name__)
+        #self.app = Flask(__name__)
+        self.app = Flask(__name__, root_path='/etc/lora_pkt_fwd/web/')
         @self.app.route('/')
         def index():
             return render_template('index.html')

@@ -1,0 +1,3 @@
+CREATE ROLE floranet WITH LOGIN PASSWORD 'florapass';
+CREATE DATABASE floranet;
+GRANT ALL PRIVILEGES ON DATABASE floranet TO floranet;

@@ -1,0 +1,18 @@
+[Unit]
+Description=lora_network_server
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=idle
+User=root
+Group=root
+WorkingDirectory=/etc/lora_pkt_fwd
+ExecStart=/usr/local/bin/floranet -c database.cfg
+StartLimitBurst=15
+StartLimitInterval=45
+RestartSec=10
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
