@@ -3,11 +3,11 @@
 from setuptools import setup, find_packages
 
 setup(name='floranet',
-      version = '0.4.8',
+      version = '0.0.1',
       description = 'LoRa Network Server',
-      author = 'Frank Edwards',
-      author_email = 'frank.edwards@fluentnetworks.com.au',
-      url = 'https://github.com/fluentnetworks/floranet',
+      author = 'Cheng',
+      author_email = 'zhongkai.cheng@gmail.com',
+      url = 'https://github.com/chengzhongkai/floranet',
       packages = find_packages(exclude=["*.test", "*.test.*"]),
       install_requires = ['twisted==18.4.0', 'psycopg2>=1.6',
                           'pyOpenSSL>=18.0.0', 'pyasn1>=0.4.3',
