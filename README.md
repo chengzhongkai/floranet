@@ -5,6 +5,14 @@ In a LoRaWAN network, the Network Server (NS) is a central element that communic
 
 For much more information on Floranet, including setup, configuration and examples, see the [Floranet Wiki](https://github.com/Fluent-networks/floranet/wiki).
 
+## Download source
+`sudo apt install git`  
+`git clone https://github.com/chengzhongkai/floranet.git`
+
+## Install
+`cd floranet`  
+`sudo ./install.sh`
+
 ### Features
 * Supports Class A and Class C end-devices.
 * Supports US 902-928 MHz and AU 915-928 MHz ISM bands. 
