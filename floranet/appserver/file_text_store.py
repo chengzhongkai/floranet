@@ -1,4 +1,6 @@
 import os
+import datetime
+import binascii
 
 from twisted.internet.defer import inlineCallbacks, returnValue
 from flask_restful import fields, marshal
@@ -82,7 +84,10 @@ class FileTextStore(Model):
         
         # Write data to our file, append and create if it doesn't exist.
         fp = open(self.file, 'a+')
-        fp.write(appdata)
+        fp.write(datetime.datetime.now().strftime('\n%Y-%m-%d %H:%M:%S.%f,'))
+        fp.write('{:016x},'.format(int(app.appeui)))
+        fp.write('{:016x},'.format(int(device.deveui)))
+        fp.write(binascii.hexlify(appdata))
         fp.close()
         
     
